@@ -25,9 +25,11 @@ angular
                             }
                         })
                         .success(function(response) {
+                        	alert(data + " Pull Started")
                             deffered.resolve(response)
                         })
                         .error(function(response, status) {
+                        	alert(data + " Pull Not Started")
                             deffered.reject(response);
                         });
                     return deffered.promise;
