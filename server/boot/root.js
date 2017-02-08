@@ -22,17 +22,18 @@ module.exports = function(server) {
     }
 
     router.post('/pull', function(req, res) {
-        if (req.body.progect) {
-            pullScript(req.body.progect)
-            res.json({
-                success: true
-            })
-        } else {
-            res.json({
-                "success": false,
-                "message": "Parametrs Incorect"
-            })
-        }
+        // if (req.body.progect) {
+        //     pullScript(req.body.progect)
+        //     res.json({
+        //         success: true
+        //     })
+        // } else {
+        //     res.json({
+        //         "success": false,
+        //         "message": "Parametrs Incorect"
+        //     })
+        // }
+        console.log(123456)
     });
 
     router.post('/pullAll', function(req, res) {

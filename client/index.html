@@ -10,12 +10,12 @@
    <link href="css/style.css" rel="stylesheet">
  </head>
  <body ng-app="app">
- <div role="navigation">
+ <div role="navigation" ng-controller="pullController">
    <div>
      <div ng-repeat="name in ['dataowl', 'envi', 'oxford', 'thegood'] track by $index">
-     	<input type="button" name="name" value="Pull {{name}}" class="pullButtons btn btn-default col-xs-3">
+     	<input type="button" name="name" value="Pull {{name}}" class="btn btn-default col-xs-3" ng-click="pull(name)">
      </div>
-     	<input type="button" name="name" value="Pull All" class="pullButtons btn btn-primary col-xs-12">
+     	<input type="button" name="name" value="Pull All" class="btn btn-primary col-xs-12" ng-click="pull('all')">
    </div>
  </div>
  
