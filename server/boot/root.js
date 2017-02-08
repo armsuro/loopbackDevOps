@@ -8,9 +8,9 @@ module.exports = function(server) {
     var homePath = "/home/vartan"
 
     var pullScript = function(progectName) {
-        var script = "cd " + homePath + "/" + progectName + " && docker exec api /app/node_modules/.bin/pm2 restart all"
-        if(progectName == "all") {
-            script = "cd " + homePath + "/dataowl && docker exec api /app/node_modules/.bin/pm2 restart all && cd " + homePath + "/oxford && docker exec api /app/node_modules/.bin/pm2 restart all && cd " + homePath + "/envi && docker exec api /app/node_modules/.bin/pm2 restart all && cd " + homePath + "/thegood && docker exec api /app/node_modules/.bin/pm2 restart all";
+        var script = "docker exec " + progectName + "_api_1 /app/node_modules/.bin/pm2 restart all"
+        if (progectName == "all") {
+            script = "docker exec dataowl_api_1 /app/node_modules/.bin/pm2 restart all && docker exec oxford_api_1 /app/node_modules/.bin/pm2 restart all && docker exec envi_api_1 /app/node_modules/.bin/pm2 restart all && docker exec thegood_api_1 /app/node_modules/.bin/pm2 restart all";
         }
         shell.exec("cd " + homePath + " && bash pull.sh " + progectName, {
             silent: true,
