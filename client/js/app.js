@@ -1,5 +1,5 @@
 'use strict';
-var apiUrl = (window.location.href.indexOf('0.0.0.0') < 0) ? "0.0.0.0:3000" : "";
+var apiUrl = (window.location.href.indexOf('0.0.0.0') < 0) ? "0.0.0.0:3000" : "http://devops.kulu.io";
 angular
     .module('app', [
         'ui.router'
