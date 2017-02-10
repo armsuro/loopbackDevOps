@@ -7,12 +7,17 @@ module.exports = function(server) {
     router.get('/', server.loopback.status());
     var homePath = "/home/vartan"
 
-    var pullScript = function(progectName) {
+    var pullScript = function(progectName, folderName) {
         var script = "docker exec " + progectName + "_api_1 /app/node_modules/.bin/pm2 restart all"
         if (progectName == "all") {
             script = "docker exec dataowl_api_1 /app/node_modules/.bin/pm2 restart all && docker exec oxford_api_1 /app/node_modules/.bin/pm2 restart all && docker exec envi_api_1 /app/node_modules/.bin/pm2 restart all && docker exec thegood_api_1 /app/node_modules/.bin/pm2 restart all";
         }
-        shell.exec("cd " + homePath + " && bash pull.sh " + progectName, {
+        if (folderName) {
+            var project = "cd " + homePath + " && bash pull.sh " + progectName;
+        } else {
+            var project = "cd " + homePath + " && bash pull.sh " + progectName + " " + folderName;
+        }
+        shell.exec(project, {
             silent: true,
             async: true
         }, function(done) {
@@ -38,10 +43,10 @@ module.exports = function(server) {
             })
         }
     });
-    
-    router.post('/pullProgect', function(req, res) {
-        if (req.body.project) {
-            pullScript(req.body.project)
+
+    router.post('/pullProject', function(req, res) {
+        if (req.body.projectName && req.body.folderName) {
+            pullScript(req.body.projectName, req.body.folderName)
             res.json({
                 success: true
             })

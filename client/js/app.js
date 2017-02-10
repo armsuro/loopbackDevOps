@@ -1,5 +1,5 @@
 'use strict';
-var apiUrl = (window.location.href.indexOf('0.0.0.0') < 0) ? "0.0.0.0:3000" : "devops.kulu.io";
+var apiUrl = (window.location.href.indexOf('0.0.0.0') < 0) ? "0.0.0.0:3000" : "";
 angular
     .module('app', [
         'ui.router'
@@ -30,6 +30,29 @@ angular
                         })
                         .error(function(response, status) {
                             alert(data + " Pull Not Started")
+                            deffered.reject(response);
+                        });
+                    return deffered.promise;
+                },
+                pullProject: function(name, folderName) {
+                    var deffered = $q.defer();
+                    $http({
+                            method: "POST",
+                            url: apiUrl + "/pullProject",
+                            data: {
+                                "projectName": name,
+                                "folderName": folderName
+                            },
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .success(function(response) {
+                            alert(name + " Pull Started")
+                            deffered.resolve(response)
+                        })
+                        .error(function(response, status) {
+                            alert(name + " Pull Not Started")
                             deffered.reject(response);
                         });
                     return deffered.promise;
@@ -80,6 +103,6 @@ angular
             PullService.pull(pull)
         }
         $scope.pullProgect = function() {
-            console.log($scope.selectedItem)
+            PullService.pullProject($scope.selectedItem.project, $scope.selectedItem.name)
         }
     }]);
