@@ -25,11 +25,11 @@ angular
                             }
                         })
                         .success(function(response) {
-                        	alert(data + " Pull Started")
+                            alert(data + " Pull Started")
                             deffered.resolve(response)
                         })
                         .error(function(response, status) {
-                        	alert(data + " Pull Not Started")
+                            alert(data + " Pull Not Started")
                             deffered.reject(response);
                         });
                     return deffered.promise;
@@ -39,7 +39,43 @@ angular
         }
     ])
     .controller('pullController', ['$scope', 'PullService', function($scope, PullService) {
-        $scope.progects = [{name: "DataOwlServer"}, {name: "DataOwlClient"}]
+        $scope.projects = [{
+            name: "DataOwlServer",
+            project: "dataowl"
+        }, {
+            name: "DataOwlClient",
+            project: "dataowl"
+        }, {
+            name: "DataOwlManager",
+            project: "dataowl"
+        }, {
+            name: "DataOwlFrontEnd",
+            project: "dataowl"
+        }, {
+            name: "EnviClient",
+            project: "envi"
+        }, {
+            name: "EnviServer",
+            project: "envi"
+        }, {
+            name: "OxfordServer",
+            project: "oxford"
+        }, {
+            name: "OxfordClient",
+            project: "oxford"
+        }, {
+            name: "TheGoodApi",
+            project: "thegood"
+        }, {
+            name: "TheGoodClient",
+            project: "thegood"
+        }, {
+            name: "TheGoodCMS",
+            project: "thegood"
+        }, {
+            name: "DevOps",
+            project: "devops"
+        }]
         $scope.pull = function(pull) {
             PullService.pull(pull)
         }
