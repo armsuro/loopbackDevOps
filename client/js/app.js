@@ -39,7 +39,11 @@ angular
         }
     ])
     .controller('pullController', ['$scope', 'PullService', function($scope, PullService) {
+        $scope.progects = [{name: "DataOwlServer"}, {name: "DataOwlClient"}]
         $scope.pull = function(pull) {
             PullService.pull(pull)
+        }
+        $scope.pullProgect = function() {
+            console.log($scope.selectedItem)
         }
     }]);

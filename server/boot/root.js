@@ -38,6 +38,20 @@ module.exports = function(server) {
             })
         }
     });
+    
+    router.post('/pullProgect', function(req, res) {
+        if (req.body.project) {
+            pullScript(req.body.project)
+            res.json({
+                success: true
+            })
+        } else {
+            res.json({
+                "success": false,
+                "message": "Parametrs Incorect"
+            })
+        }
+    });
 
     server.use(router);
 };
